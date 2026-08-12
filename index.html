@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Projects</title>
+
+    <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #ffffff;
+        color: #333333;
+    }
+
+
+    /* =====================================================
+       FEATURED PROJECTS SECTION
+    ===================================================== */
+
+    .featured-projects {
+        width: 100%;
+        margin-top: 70px;
+        padding: 26px 0 18px;
+        background: #062340;
+        border-bottom: 2px solid #c88a19;
+        overflow: hidden;
+        position: relative;
+    }
+
+
+    /* =====================================================
+       TITLE
+    ===================================================== */
+
+    .featured-title {
+        text-align: center;
+        color: #ffffff;
+        font-size: 19px;
+        font-weight: 600;
+        margin: 0 0 12px;
+    }
+
+
+    /* =====================================================
+       HIDE RADIO BUTTONS
+    ===================================================== */
+
+    .project-filter,
+    .carousel-position {
+        display: none;
+    }
+
+
+    /* =====================================================
+       CATEGORY BUTTONS
+    ===================================================== */
+
+    .project-categories {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 auto 15px;
+        padding: 0 15px;
+    }
+
+
+    .project-category {
+        display: inline-block;
+        min-width: 105px;
+        padding: 7px 15px;
+        text-align: center;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid rgba(255,255,255,0.75);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+
+    .project-category:hover {
+        background: #c88a19;
+        border-color: #c88a19;
+        transform: translateY(-1px);
+    }
+
+
+    /* =====================================================
+       ACTIVE CATEGORY
+    ===================================================== */
+
+    #filter-all:checked ~ .project-categories label[for="filter-all"],
+    #filter-residential:checked ~ .project-categories label[for="filter-residential"],
+    #filter-commercial:checked ~ .project-categories label[for="filter-commercial"],
+    #filter-industrial:checked ~ .project-categories label[for="filter-industrial"],
+    #filter-institutional:checked ~ .project-categories label[for="filter-institutional"],
+    #filter-hospitality:checked ~ .project-categories label[for="filter-hospitality"],
+    #filter-landscape:checked ~ .project-categories label[for="filter-landscape"],
+    #filter-interior:checked ~ .project-categories label[for="filter-interior"],
+    #filter-urban:checked ~ .project-categories label[for="filter-urban"] {
+
+        background: #c88a19;
+        border-color: #c88a19;
+    }
+
+
+    /* =====================================================
+       CAROUSEL WRAPPER
+    ===================================================== */
+
+    .project-slider-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1450px;
+        margin: 0 auto;
+        padding: 0 45px;
+    }
+
+
+    /* =====================================================
+       VIEWPORT
+    ===================================================== */
+
+    .project-slider-viewport {
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       PROJECT SLIDER
+    ===================================================== */
+
+    .project-slider {
+        display: flex;
+        gap: 6px;
+        width: max-content;
+        transition: transform 0.5s ease;
+    }
+
+
+    /* =====================================================
+       PROJECT ITEM
+    ===================================================== */
+
+    .project-item {
+        width: 165px;
+        height: 105px;
+        flex: 0 0 165px;
+        position: relative;
+        overflow: hidden;
+        background: #0b3155;
+        border-radius: 4px;
+    }
+
+
+    .project-item a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+    }
+
+
+    .project-item img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+
+    .project-item:hover img {
+        transform: scale(1.08);
+    }
+
+
+    /* =====================================================
+       IMAGE HOVER TEXT
+    ===================================================== */
+
+    .project-item a::after {
+        content: "View Full Image";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 7px 4px;
+        text-align: center;
+        color: #ffffff;
+        font-size: 10px;
+        background: rgba(4,28,53,0.88);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+
+    .project-item:hover a::after {
+        transform: translateY(0);
+    }
+
+
+    /* =====================================================
+       CAROUSEL ARROWS
+    ===================================================== */
+
+    .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 38px;
+        height: 42px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #c88a19;
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: 300;
+        line-height: 1;
+        border-radius: 3px;
+        cursor: pointer;
+        z-index: 50;
+        transition: all 0.25s ease;
+    }
+
+
+    .carousel-arrow:hover {
+        background: #e0a02b;
+        transform:
+            translateY(-50%)
+            scale(1.08);
+    }
+
+
+    .carousel-arrow.left {
+        left: 5px;
+    }
+
+
+    .carousel-arrow.right {
+        right: 5px;
+    }
+
+
+    /* =====================================================
+       POSITION 1
+    ===================================================== */
+
+    #position-1:checked
+    ~ .project-slider-wrapper
+    .project-slider {
+        transform: translateX(0);
+    }
+
+
+    #position-1:checked
+    ~ .project-slider-wrapper
+    .arrow-right-1 {
+        display: flex;
+    }
+
+
+    /* =====================================================
+       POSITION 2
+    ===================================================== */
+
+    #position-2:checked
+    ~ .project-slider-wrapper
+    .project-slider {
+        transform: translateX(-1368px);
+    }
+
+
+    #position-2:checked
+    ~ .project-slider-wrapper
+    .arrow-left-2,
+
+    #position-2:checked
+    ~ .project-slider-wrapper
+    .arrow-right-2 {
+        display: flex;
+    }
+
+
+    /* =====================================================
+       POSITION 3
+    ===================================================== */
+
+    #position-3:checked
+    ~ .project-slider-wrapper
+    .project-slider {
+        transform: translateX(-2736px);
+    }
+
+
+    #position-3:checked
+    ~ .project-slider-wrapper
+    .arrow-left-3 {
+        display: flex;
+    }
+
+
+    /* =====================================================
+       ALL PROJECTS
+    ===================================================== */
+
+    #filter-all:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: block;
+    }
+
+
+    /* =====================================================
+       RESIDENTIAL
+    ===================================================== */
+
+    #filter-residential:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-residential:checked
+    ~ .project-slider-wrapper
+    .residential-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       COMMERCIAL
+    ===================================================== */
+
+    #filter-commercial:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-commercial:checked
+    ~ .project-slider-wrapper
+    .commercial-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       INDUSTRIAL
+    ===================================================== */
+
+    #filter-industrial:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-industrial:checked
+    ~ .project-slider-wrapper
+    .industrial-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       INSTITUTIONAL
+    ===================================================== */
+
+    #filter-institutional:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-institutional:checked
+    ~ .project-slider-wrapper
+    .institutional-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       HOSPITALITY
+    ===================================================== */
+
+    #filter-hospitality:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-hospitality:checked
+    ~ .project-slider-wrapper
+    .hospitality-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       LANDSCAPE
+    ===================================================== */
+
+    #filter-landscape:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-landscape:checked
+    ~ .project-slider-wrapper
+    .landscape-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       INTERIOR
+    ===================================================== */
+
+    #filter-interior:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-interior:checked
+    ~ .project-slider-wrapper
+    .interior-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       URBAN PLANNING
+    ===================================================== */
+
+    #filter-urban:checked
+    ~ .project-slider-wrapper
+    .project-item {
+        display: none;
+    }
+
+
+    #filter-urban:checked
+    ~ .project-slider-wrapper
+    .urban-project {
+        display: block;
+    }
+
+
+    /* =====================================================
+       RESET SLIDER FOR CATEGORY FILTER
+    ===================================================== */
+
+    #filter-residential:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-commercial:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-industrial:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-institutional:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-hospitality:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-landscape:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-interior:checked
+    ~ .project-slider-wrapper
+    .project-slider,
+
+    #filter-urban:checked
+    ~ .project-slider-wrapper
+    .project-slider {
+
+        transform: translateX(0);
+    }
+
+
+    /* =====================================================
+       HIDE CAROUSEL ARROWS WHEN FILTER IS SELECTED
+    ===================================================== */
+
+    #filter-residential:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-commercial:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-industrial:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-institutional:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-hospitality:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-landscape:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-interior:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow,
+
+    #filter-urban:checked
+    ~ .project-slider-wrapper
+    .carousel-arrow {
+
+        display: none !important;
+    }
+
+
+    /* =====================================================
+       FULLSCREEN IMAGE POPUP
+    ===================================================== */
+
+    .image-popup {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.97);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 80px;
+        z-index: 99999;
+    }
+
+
+    .image-popup:target {
+        display: flex;
+    }
+
+
+    /* =====================================================
+       POPUP CONTENT
+    ===================================================== */
+
+    .popup-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .popup-content img {
+        display: block;
+        max-width: 90vw;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow:
+            0 0 30px rgba(0,0,0,0.5);
+    }
+
+
+    /* =====================================================
+       POPUP CLOSE
+    ===================================================== */
+
+    .popup-close {
+        position: fixed;
+        top: 20px;
+        right: 28px;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #c88a19;
+        color: #ffffff;
+        border-radius: 50%;
+        text-decoration: none;
+        font-size: 34px;
+        font-weight: 300;
+        line-height: 1;
+        z-index: 100002;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+
+    .popup-close:hover {
+        background: #ffffff;
+        color: #062340;
+        transform: rotate(90deg);
+    }
+
+
+    /* =====================================================
+       POPUP PREVIOUS / NEXT
+    ===================================================== */
+
+    .popup-prev,
+    .popup-next {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 52px;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(200,138,25,0.95);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 42px;
+        font-weight: 300;
+        line-height: 1;
+        border-radius: 4px;
+        z-index: 100001;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+
+    .popup-prev {
+        left: 20px;
+    }
+
+
+    .popup-next {
+        right: 20px;
+    }
+
+
+    .popup-prev:hover,
+    .popup-next:hover {
+        background: #ffffff;
+        color: #062340;
+        transform:
+            translateY(-50%)
+            scale(1.08);
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (max-width: 1100px) {
+
+        .project-item {
+            width: 155px;
+            flex: 0 0 155px;
+        }
+
+
+        #position-2:checked
+        ~ .project-slider-wrapper
+        .project-slider {
+            transform: translateX(-1288px);
+        }
+
+
+        #position-3:checked
+        ~ .project-slider-wrapper
+        .project-slider {
+            transform: translateX(-2576px);
+        }
+
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 650px) {
+
+        .featured-projects {
+            margin-top: 55px;
+            padding: 20px 0 15px;
+        }
+
+
+        .featured-title {
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+
+        /* CATEGORY SCROLL */
+
+        .project-categories {
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 0 10px 8px;
+        }
+
+
+        .project-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .project-category {
+            flex: 0 0 auto;
+        }
+
+
+        /* PROJECT SLIDER */
+
+        .project-slider-wrapper {
+            padding: 0 35px;
+        }
+
+
+        .project-item {
+            width: 160px;
+            flex: 0 0 160px;
+            height: 115px;
+        }
+
+
+        #position-2:checked
+        ~ .project-slider-wrapper
+        .project-slider {
+            transform: translateX(-996px);
+        }
+
+
+        #position-3:checked
+        ~ .project-slider-wrapper
+        .project-slider {
+            transform: translateX(-1992px);
+        }
+
+
+        /* CAROUSEL ARROWS */
+
+        .carousel-arrow {
+            width: 32px;
+            height: 38px;
+            font-size: 25px;
+        }
+
+        /* POPUP */
+
+        .image-popup {
+            padding: 30px 15px;
+        }
+
+
+        .popup-content img {
+            max-width: 94vw;
+            max-height: 82vh;
+        }
+
+
+        .popup-prev,
+        .popup-next {
+            width: 40px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+
+        .popup-prev {
+            left: 8px;
+        }
+
+
+        .popup-next {
+            right: 8px;
+        }
+
+
+        .popup-close {
+            top: 10px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            font-size: 28px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+<body>
+
+
+    <!-- =====================================================
+     FEATURED PROJECTS
+====================================================== -->
+
+<section class="featured-projects">
+
+
+    <h2 class="featured-title">
+        FEATURED PROJECTS
+    </h2>
+
+
+    <!-- =================================================
+         CATEGORY FILTERS
+    ================================================== -->
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-all"
+        class="project-filter"
+        checked
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-residential"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-commercial"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-industrial"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-institutional"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-hospitality"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-landscape"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-interior"
+        class="project-filter"
+    >
+
+    <input
+        type="radio"
+        name="project-filter"
+        id="filter-urban"
+        class="project-filter"
+    >
+
+
+    <!-- =================================================
+         CAROUSEL POSITIONS
+    ================================================== -->
+
+    <input
+        type="radio"
+        name="carousel-position"
+        id="position-1"
+        class="carousel-position"
+        checked
+    >
+
+    <input
+        type="radio"
+        name="carousel-position"
+        id="position-2"
+        class="carousel-position"
+    >
+
+    <input
+        type="radio"
+        name="carousel-position"
+        id="position-3"
+        class="carousel-position"
+    >
+
+
+    <!-- =================================================
+         CATEGORY BUTTONS
+    ================================================== -->
+
+    <div class="project-categories">
+
+
+        <label
+            for="filter-all"
+            class="project-category">
+            All Projects
+        </label>
+
+
+        <label
+            for="filter-residential"
+            class="project-category">
+            Residential
+        </label>
+
+
+        <label
+            for="filter-commercial"
+            class="project-category">
+            Commercial
+        </label>
+
+
+        <label
+            for="filter-industrial"
+            class="project-category">
+            Industrial
+        </label>
+
+
+        <label
+            for="filter-institutional"
+            class="project-category">
+            Institutional
+        </label>
+
+
+        <label
+            for="filter-hospitality"
+            class="project-category">
+            Hospitality
+        </label>
+
+
+        <label
+            for="filter-landscape"
+            class="project-category">
+            Landscape
+        </label>
+
+
+        <label
+            for="filter-interior"
+            class="project-category">
+            Interior
+        </label>
+
+
+        <label
+            for="filter-urban"
+            class="project-category">
+            Urban Planning
+        </label>
+
+    </div>
+
+
+    <!-- =================================================
+         CAROUSEL
+    ================================================== -->
+
+    <div class="project-slider-wrapper">
+
+
+        <!-- LEFT ARROWS -->
+
+        <label
+            for="position-1"
+            class="carousel-arrow left arrow-left-2"
+            aria-label="Previous">
+            &#10094;
+        </label>
+
+
+        <label
+            for="position-2"
+            class="carousel-arrow left arrow-left-3"
+            aria-label="Previous">
+            &#10094;
+        </label>
+
+
+        <!-- RIGHT ARROWS -->
+
+        <label
+            for="position-2"
+            class="carousel-arrow right arrow-right-1"
+            aria-label="Next">
+            &#10095;
+        </label>
+
+
+        <label
+            for="position-3"
+            class="carousel-arrow right arrow-right-2"
+            aria-label="Next">
+            &#10095;
+        </label>
+
+
+        <!-- =================================================
+             IMAGE VIEWPORT
+        ================================================== -->
+
+        <div class="project-slider-viewport">
+
+
+            <div class="project-slider">
+
+
+                <!-- ================================
+                     RESIDENTIAL
+                ================================= -->
+
+                <div class="project-item residential-project">
+                    <a href="#residential-1">
+                        <img
+                            src="images/residential2.jpeg"
+                            alt="Residential Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item residential-project">
+                    <a href="#residential-2">
+                        <img
+                            src="images/residential3.jpeg"
+                            alt="Residential Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item residential-project">
+                    <a href="#residential-2">
+                        <img
+                            src="images/residential4.jpeg"
+                            alt="Residential Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item residential-project">
+                    <a href="#residential-2">
+                        <img
+                            src="images/residential5.jpeg"
+                            alt="Residential Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item residential-project">
+                    <a href="#residential-2">
+                        <img
+                            src="images/residential6.jpeg"
+                            alt="Residential Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item residential-project">
+                    <a href="#residential-2">
+                        <img
+                            src="images/residential7.jpeg"
+                            alt="Residential Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item residential-project">
+                    <a href="#residential-3">
+                        <img
+                            src="images/serve1.png"
+                            alt="Residential Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     COMMERCIAL
+                ================================= -->
+
+                <div class="project-item commercial-project">
+                    <a href="#commercial-1">
+                        <img
+                            src="images/commercial2.jpeg"
+                            alt="Commercial Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item commercial-project">
+                    <a href="#commercial-2">
+                        <img
+                            src="images/commercial3.jpeg"
+                            alt="Commercial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item commercial-project">
+                    <a href="#commercial-2">
+                        <img
+                            src="images/commercial4.jpeg"
+                            alt="Commercial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item commercial-project">
+                    <a href="#commercial-2">
+                        <img
+                            src="images/commercial5.jpeg"
+                            alt="Commercial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item commercial-project">
+                    <a href="#commercial-2">
+                        <img
+                            src="images/commercial6.jpeg"
+                            alt="Commercial Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item commercial-project">
+                    <a href="#commercial-3">
+                        <img
+                            src="images/serve2.png"
+                            alt="Commercial Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     INDUSTRIAL
+                ================================= -->
+
+                <div class="project-item industrial-project">
+                    <a href="#industrial-1">
+                        <img
+                            src="images/industrial2.jpeg"
+                            alt="Industrial Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item industrial-project">
+                    <a href="#industrial-2">
+                        <img
+                            src="images/industrial3.jpeg"
+                            alt="Industrial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item industrial-project">
+                    <a href="#industrial-2">
+                        <img
+                            src="images/industrial4.png"
+                            alt="Industrial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item industrial-project">
+                    <a href="#industrial-2">
+                        <img
+                            src="images/industrial5.png"
+                            alt="Industrial Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item industrial-project">
+                    <a href="#industrial-2">
+                        <img
+                            src="images/industrial6.png"
+                            alt="Industrial Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item industrial-project">
+                    <a href="#industrial-3">
+                        <img
+                            src="images/serve3.png"
+                            alt="Industrial Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     INSTITUTIONAL
+                ================================= -->
+
+                <div class="project-item institutional-project">
+                    <a href="#institutional-1">
+                        <img
+                            src="images/institutional2.jpeg"
+                            alt="Institutional Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item institutional-project">
+                    <a href="#institutional-2">
+                        <img
+                            src="images/institutional3.jpeg"
+                            alt="Institutional Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item institutional-project">
+                    <a href="#institutional-2">
+                        <img
+                            src="images/institutional4.png"
+                            alt="Institutional Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item institutional-project">
+                    <a href="#institutional-2">
+                        <img
+                            src="images/institutional5.png"
+                            alt="Institutional Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item institutional-project">
+                    <a href="#institutional-2">
+                        <img
+                            src="images/institutional6.png"
+                            alt="Institutional Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item institutional-project">
+                    <a href="#institutional-3">
+                        <img
+                            src="images/serve4.png"
+                            alt="Institutional Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     HOSPITALITY
+                ================================= -->
+
+                <div class="project-item hospitality-project">
+                    <a href="#hospitality-1">
+                        <img
+                            src="images/hospitality2.jpeg"
+                            alt="Hospitality Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item hospitality-project">
+                    <a href="#hospitality-2">
+                        <img
+                            src="images/hospitality3.jpeg"
+                            alt="Hospitality Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item hospitality-project">
+                    <a href="#hospitality-2">
+                        <img
+                            src="images/hospitality4.png"
+                            alt="Hospitality Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item hospitality-project">
+                    <a href="#hospitality-2">
+                        <img
+                            src="images/hospitality5.png"
+                            alt="Hospitality Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item hospitality-project">
+                    <a href="#hospitality-2">
+                        <img
+                            src="images/hospitality6.png"
+                            alt="Hospitality Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item hospitality-project">
+                    <a href="#hospitality-3">
+                        <img
+                            src="images/serve5.png"
+                            alt="Hospitality Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     LANDSCAPE
+                ================================= -->
+
+                <div class="project-item landscape-project">
+                    <a href="#landscape-1">
+                        <img
+                            src="images/landscape2.jpeg"
+                            alt="Landscape Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item landscape-project">
+                    <a href="#landscape-2">
+                        <img
+                            src="images/landscape3.png"
+                            alt="Landscape Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item landscape-project">
+                    <a href="#landscape-2">
+                        <img
+                            src="images/landscape4.png"
+                            alt="Landscape Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item landscape-project">
+                    <a href="#landscape-2">
+                        <img
+                            src="images/landscape5.png"
+                            alt="Landscape Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item landscape-project">
+                    <a href="#landscape-2">
+                        <img
+                            src="images/landscape6.png"
+                            alt="Landscape Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item landscape-project">
+                    <a href="#landscape-3">
+                        <img
+                            src="images/serve6.png"
+                            alt="Landscape Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     INTERIOR
+                ================================= -->
+
+                <div class="project-item interior-project">
+                    <a href="#interior-1">
+                        <img
+                            src="images/interior2.jpg"
+                            alt="Interior Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item interior-project">
+                    <a href="#interior-2">
+                        <img
+                            src="images/interior3.jpg"
+                            alt="Interior Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item interior-project">
+                    <a href="#interior-2">
+                        <img
+                            src="images/interior4.jpg"
+                            alt="Interior Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item interior-project">
+                    <a href="#interior-2">
+                        <img
+                            src="images/interior5.jpg"
+                            alt="Interior Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item interior-project">
+                    <a href="#interior-2">
+                        <img
+                            src="images/interior6.jpg"
+                            alt="Interior Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item interior-project">
+                    <a href="#interior-3">
+                        <img
+                            src="images/serve7.png"
+                            alt="Interior Project 3">
+                    </a>
+                </div>
+
+
+                <!-- ================================
+                     URBAN PLANNING
+                ================================= -->
+
+                <div class="project-item urban-project">
+                    <a href="#urban-1">
+                        <img
+                            src="images/urban2.jpeg"
+                            alt="Urban Planning Project 1">
+                    </a>
+                </div>
+
+
+                <div class="project-item urban-project">
+                    <a href="#urban-2">
+                        <img
+                            src="images/urban3.jpeg"
+                            alt="Urban Planning Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item urban-project">
+                    <a href="#urban-2">
+                        <img
+                            src="images/urban4.png"
+                            alt="Urban Planning Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item urban-project">
+                    <a href="#urban-2">
+                        <img
+                            src="images/urban5.png"
+                            alt="Urban Planning Project 2">
+                    </a>
+                </div>
+
+                                <div class="project-item urban-project">
+                    <a href="#urban-2">
+                        <img
+                            src="images/urban6.png"
+                            alt="Urban Planning Project 2">
+                    </a>
+                </div>
+
+
+                <div class="project-item urban-project">
+                    <a href="#urban-3">
+                        <img
+                            src="images/serve8.png"
+                            alt="Urban Planning Project 3">
+                    </a>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FULLSCREEN POPUPS
+====================================================== -->
+
+
+<!-- ================================
+     RESIDENTIAL 1
+================================= -->
+
+<div id="residential-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#urban-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/residential2.jpeg"
+            alt="Residential Project 1">
+
+    </div>
+
+
+    <a
+        href="#residential-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     RESIDENTIAL 2
+================================= -->
+
+<div id="residential-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#residential-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/residential3.jpeg"
+            alt="Residential Project 2">
+
+    </div>
+
+
+    <a
+        href="#residential-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     RESIDENTIAL 3
+================================= -->
+
+<div id="residential-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#residential-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve1.png"
+            alt="Residential Project 3">
+    </div>
+
+
+    <a
+        href="#commercial-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     COMMERCIAL 1
+================================= -->
+
+<div id="commercial-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#residential-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/commercial2.jpeg"
+            alt="Commercial Project 1">
+
+    </div>
+
+
+    <a
+        href="#commercial-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     COMMERCIAL 2
+================================= -->
+
+<div id="commercial-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#commercial-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/commercial3.jpeg"
+            alt="Commercial Project 2">
+
+    </div>
+
+
+    <a
+        href="#commercial-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     COMMERCIAL 3
+================================= -->
+
+<div id="commercial-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#commercial-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve2.png"
+            alt="Commercial Project 3">
+
+    </div>
+
+
+    <a
+        href="#industrial-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INDUSTRIAL 1
+================================= -->
+
+<div id="industrial-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#commercial-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/industrial2.jpeg"
+            alt="Industrial Project 1">
+
+    </div>
+
+
+    <a
+        href="#industrial-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INDUSTRIAL 2
+================================= -->
+
+<div id="industrial-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#industrial-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/industrial3.jpeg"
+            alt="Industrial Project 2">
+
+    </div>
+
+
+    <a
+        href="#industrial-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INDUSTRIAL 3
+================================= -->
+
+<div id="industrial-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#industrial-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve3.png"
+            alt="Industrial Project 3">
+
+    </div>
+
+
+    <a
+        href="#institutional-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INSTITUTIONAL 1
+================================= -->
+
+<div id="institutional-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#industrial-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/institutional2.jpeg"
+            alt="Institutional Project 1">
+
+    </div>
+
+
+    <a
+        href="#institutional-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INSTITUTIONAL 2
+================================= -->
+
+<div id="institutional-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#institutional-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/institutional3.jpeg"
+            alt="Institutional Project 2">
+
+    </div>
+
+
+    <a
+        href="#institutional-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INSTITUTIONAL 3
+================================= -->
+
+<div id="institutional-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#institutional-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve4.png"
+            alt="Institutional Project 3">
+
+    </div>
+
+
+    <a
+        href="#hospitality-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     HOSPITALITY 1
+================================= -->
+
+<div id="hospitality-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#institutional-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/hospitality2.jpeg"
+            alt="Hospitality Project 1">
+
+    </div>
+
+
+    <a
+        href="#hospitality-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     HOSPITALITY 2
+================================= -->
+
+<div id="hospitality-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#hospitality-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/hospitality3.jpeg"
+            alt="Hospitality Project 2">
+
+    </div>
+
+
+    <a
+        href="#hospitality-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     HOSPITALITY 3
+================================= -->
+
+<div id="hospitality-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#hospitality-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve5.png"
+            alt="Hospitality Project 3">
+
+    </div>
+
+
+    <a
+        href="#landscape-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     LANDSCAPE 1
+================================= -->
+
+<div id="landscape-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#hospitality-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/landscape2.jpeg"
+            alt="Landscape Project 1">
+
+    </div>
+
+
+    <a
+        href="#landscape-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     LANDSCAPE 2
+================================= -->
+
+<div id="landscape-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#landscape-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/landscape3.png"
+            alt="Landscape Project 2">
+
+    </div>
+
+
+    <a
+        href="#landscape-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     LANDSCAPE 3
+================================= -->
+
+<div id="landscape-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#landscape-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve6.png"
+            alt="Landscape Project 3">
+
+    </div>
+
+
+    <a
+        href="#interior-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INTERIOR 1
+================================= -->
+
+<div id="interior-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#landscape-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/interior2.jpg"
+            alt="Interior Project 1">
+
+    </div>
+
+
+    <a
+        href="#interior-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INTERIOR 2
+================================= -->
+
+<div id="interior-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#interior-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/interior3.jpg"
+            alt="Interior Project 2">
+
+    </div>
+
+
+    <a
+        href="#interior-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     INTERIOR 3
+================================= -->
+
+<div id="interior-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#interior-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve7.png"
+            alt="Interior Project 3">
+
+    </div>
+
+
+    <a
+        href="#urban-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     URBAN 1
+================================= -->
+
+<div id="urban-1" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#interior-3"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/urban2.jpeg"
+            alt="Urban Planning Project 1">
+
+    </div>
+
+
+    <a
+        href="#urban-2"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     URBAN 2
+================================= -->
+
+<div id="urban-2" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#urban-1"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/urban3.jpeg"
+            alt="Urban Planning Project 2">
+
+    </div>
+
+
+    <a
+        href="#urban-3"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+
+<!-- ================================
+     URBAN 3
+================================= -->
+
+<div id="urban-3" class="image-popup">
+
+    <a
+        href="#"
+        class="popup-close"
+        aria-label="Close">
+        &times;
+    </a>
+
+
+    <a
+        href="#urban-2"
+        class="popup-prev"
+        aria-label="Previous">
+        &#10094;
+    </a>
+
+
+    <div class="popup-content">
+
+        <img
+            src="images/serve8.png"
+            alt="Urban Planning Project 3">
+
+    </div>
+
+
+    <a
+        href="#residential-1"
+        class="popup-next"
+        aria-label="Next">
+        &#10095;
+    </a>
+
+</div>
+
+    
+
+</body>
+</html>
